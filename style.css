@@ -1,7 +1,174 @@
-body{margin:0;background:#222;color:#fff;font-family:Arial}
-#menu{text-align:center;padding:50px}
-#game{width:1100px;height:600px;margin:20px auto;position:relative;
-background:linear-gradient(#87ceeb 0,#87ceeb 60%,#66aa44 60%,#66aa44 100%);
-border:4px solid #000}
-#player{position:absolute;left:150px;bottom:100px;width:60px;height:80px;
-background:#ffd166;border:3px solid #000;border-radius:10px}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #171717;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+#app {
+  width: 1100px;
+  margin: 30px auto;
+}
+
+#menu {
+  height: 680px;
+  background: linear-gradient(#263859, #17223b);
+  border: 4px solid #000;
+  text-align: center;
+  padding-top: 200px;
+}
+
+#menu h1 {
+  font-size: 56px;
+  margin-bottom: 10px;
+}
+
+#menu p {
+  font-size: 22px;
+  color: #ddd;
+}
+
+#startBtn {
+  margin-top: 30px;
+  padding: 16px 36px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 4px solid #000;
+  border-radius: 12px;
+  background: #ffd166;
+  cursor: pointer;
+}
+
+#topUI {
+  height: 60px;
+  background: #2d1b0e;
+  border: 4px solid #000;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#topUI div:nth-child(2) {
+  color: #ffd166;
+}
+
+#battlefield {
+  position: relative;
+  width: 1100px;
+  height: 500px;
+  overflow: hidden;
+  border: 4px solid #000;
+  background:
+    linear-gradient(#7ec8ff 0%, #c8f0ff 58%, #74b65f 58%, #4c8c3a 100%);
+}
+
+#backgroundText {
+  position: absolute;
+  top: 34px;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.base {
+  position: absolute;
+  bottom: 80px;
+  width: 110px;
+  height: 150px;
+  border: 4px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#playerBase {
+  left: 12px;
+  background: #4b7bec;
+}
+
+#enemyBase {
+  right: 12px;
+  background: #eb3b5a;
+}
+
+#player {
+  position: absolute;
+  left: 150px;
+  bottom: 92px;
+  width: 80px;
+  height: 95px;
+  background: #ffd166;
+  border: 4px solid #000;
+  border-radius: 18px 18px 8px 8px;
+}
+
+#player::after {
+  content: "PALADOG";
+  position: absolute;
+  width: 100%;
+  top: 38px;
+  left: 0;
+  text-align: center;
+  color: #111;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+#bottomUI {
+  height: 110px;
+  background: #2d1b0e;
+  border: 4px solid #000;
+  border-top: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+}
+
+#manaBox {
+  width: 170px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #74b9ff;
+}
+
+.slot {
+  width: 145px;
+  height: 72px;
+  border: 3px solid #000;
+  border-radius: 10px;
+  background: #f7d794;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.slot:hover {
+  background: #f6b93b;
+}
+
+.slot small {
+  font-size: 12px;
+}
+
+.skill {
+  background: #c7ecee;
+}
+
+#guideText {
+  margin-top: 12px;
+  text-align: center;
+  color: #ddd;
+  font-size: 20px;
+}

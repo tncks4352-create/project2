@@ -1,24 +1,54 @@
 <!DOCTYPE html>
-<html lang="ko"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paladog Project</title>
-<link rel="stylesheet" href="style.css">
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paladog Project</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="app">
-  <div id="menu">
-    <h1>PALADOG PROJECT</h1>
-    <button id="startBtn">게임 시작</button>
+  <div id="app">
+    <div id="menu">
+      <h1>PALADOG PROJECT</h1>
+      <p>팔라독 스타일 라인 전투 웹게임</p>
+      <button id="startBtn">게임 시작</button>
+    </div>
+
+    <div id="game" style="display:none;">
+      <div id="topUI">
+        <div>아군 기지 HP <span id="playerBaseHp">500</span></div>
+        <div>STAGE <span id="stageText">1</span></div>
+        <div>적 기지 HP <span id="enemyBaseHp">700</span></div>
+      </div>
+
+      <div id="battlefield">
+        <div id="backgroundText">PALADOG STYLE WEB GAME</div>
+        <div id="playerBase" class="base">HOME</div>
+        <div id="enemyBase" class="base">ENEMY</div>
+        <div id="player"></div>
+      </div>
+
+      <div id="bottomUI">
+        <div id="manaBox">마나 <span id="manaText">0</span> / 100</div>
+
+        <button class="slot">1. 토끼병<br><small>20 Mana</small></button>
+        <button class="slot">2. 고양이 궁수<br><small>35 Mana</small></button>
+        <button class="slot">3. 곰 전사<br><small>55 Mana</small></button>
+        <button class="slot skill">Q. 힐<br><small>30 Mana</small></button>
+        <button class="slot skill">E. 번개<br><small>45 Mana</small></button>
+      </div>
+
+      <div id="guideText">
+        A / D 이동
+      </div>
+    </div>
   </div>
-  <div id="game" style="display:none;">
-    <div id="player"></div>
-  </div>
-</div>
-<script src="./js/ui.js"></script>
-<script src="./js/player.js"></script>
-<script src="./js/unit.js"></script>
-<script src="./js/enemy.js"></script>
-<script src="./js/stage.js"></script>
-<script src="./js/main.js"></script>
-</body></html>
+
+  <script src="./js/ui.js"></script>
+  <script src="./js/player.js"></script>
+  <script src="./js/unit.js"></script>
+  <script src="./js/enemy.js"></script>
+  <script src="./js/stage.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
