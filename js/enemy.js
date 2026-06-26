@@ -16,11 +16,11 @@ const ENEMY_DATA = {
   minotaur: {
     id: "minotaur",
     name: "Minotaur",
-    hp: 300,
-    atk: 8,
-    speed: 0.6,
+    hp: 180,
+    atk: 6,
+    speed: 0.5,
     attackRange: 30,
-    attackInterval: 1300,
+    attackInterval: 1500,
     spawnX: 900,
     bottom: 82,
     width: 68,
@@ -227,11 +227,11 @@ class EnemyManager {
     this.enemies = [];
     this.spawnTimers = {
       skeleton: {
-        interval: 3000,
+        interval: 4000,
         lastSpawnTime: 0
       },
       minotaur: {
-        interval: 8000,
+        interval: 12000,
         lastSpawnTime: 0
       }
     };
