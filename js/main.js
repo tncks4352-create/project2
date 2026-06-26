@@ -10,7 +10,9 @@ let selectedHero = null;
 
 const gameData = {
   playerBaseHp: 500,
+  playerBaseMaxHp: 500,
   enemyBaseHp: 700,
+  enemyBaseMaxHp: 700,
   stage: 1
 };
 
@@ -231,6 +233,10 @@ function updateUI() {
   document.getElementById("playerBaseHp").textContent = gameData.playerBaseHp;
   document.getElementById("enemyBaseHp").textContent = gameData.enemyBaseHp;
   document.getElementById("manaText").textContent = Math.floor(player.mana);
+  document.getElementById("playerBaseHpFill").style.width =
+    gameData.playerBaseHp / gameData.playerBaseMaxHp * 100 + "%";
+  document.getElementById("enemyBaseHpFill").style.width =
+    gameData.enemyBaseHp / gameData.enemyBaseMaxHp * 100 + "%";
 }
 
 function loop() {

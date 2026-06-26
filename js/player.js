@@ -2,7 +2,7 @@ class Player {
   constructor() {
     this.el = document.getElementById("player");
 
-    this.startX = 150;
+    this.startX = 170;
     this.x = this.startX;
     this.speed = 4;
 
@@ -30,7 +30,7 @@ class Player {
     if (keys["a"]) this.x -= this.speed;
     if (keys["d"]) this.x += this.speed;
 
-    this.x = Math.max(125, Math.min(820, this.x));
+    this.x = Math.max(150, Math.min(740, this.x));
   }
 
   regenMana() {
