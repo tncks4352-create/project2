@@ -27,6 +27,7 @@ class Enemy {
     this.battlefield = battlefield;
     this.x = enemyData.spawnX;
     this.hp = enemyData.hp;
+    this.maxHp = enemyData.hp;
     this.atk = enemyData.atk;
     this.state = ENEMY_STATE.MOVE;
     this.target = null;
@@ -40,6 +41,7 @@ class Enemy {
     this.el.style.height = enemyData.height + "px";
     this.el.style.bottom = enemyData.bottom + "px";
 
+    this.hpBarFill = this.createHpBar();
     this.battlefield.appendChild(this.el);
     this.render();
   }
@@ -68,6 +70,24 @@ class Enemy {
   render() {
     this.el.style.left = this.x + "px";
     this.el.dataset.state = this.state;
+    this.updateHpBar();
+  }
+
+  createHpBar() {
+    const hpBar = document.createElement("div");
+    const hpBarFill = document.createElement("div");
+
+    hpBar.className = "hp-bar";
+    hpBarFill.className = "hp-bar-fill";
+    hpBar.appendChild(hpBarFill);
+    this.el.appendChild(hpBar);
+
+    return hpBarFill;
+  }
+
+  updateHpBar() {
+    const hpRatio = Math.max(0, this.hp) / this.maxHp;
+    this.hpBarFill.style.width = hpRatio * 100 + "%";
   }
 
   updateTarget(units) {
@@ -109,6 +129,7 @@ class Enemy {
     const now = Date.now();
     if (now - this.lastAttackTime < this.data.attackInterval) return;
 
+    this.playAttackMotion();
     this.target.takeDamage(this.atk);
     this.lastAttackTime = now;
 
@@ -122,6 +143,8 @@ class Enemy {
     if (this.state === ENEMY_STATE.DEAD) return;
 
     this.hp -= damage;
+    this.showDamageText(damage);
+    this.updateHpBar();
 
     if (this.hp <= 0) {
       this.die();
@@ -130,8 +153,33 @@ class Enemy {
 
   die() {
     this.hp = 0;
+    this.updateHpBar();
     this.setState(ENEMY_STATE.DEAD);
-    this.remove();
+    this.remove(true);
+  }
+
+  playAttackMotion() {
+    this.el.classList.remove("attack-motion");
+
+    requestAnimationFrame(() => {
+      this.el.classList.add("attack-motion");
+
+      setTimeout(() => {
+        this.el.classList.remove("attack-motion");
+      }, 120);
+    });
+  }
+
+  showDamageText(damage) {
+    const damageText = document.createElement("div");
+
+    damageText.className = "damage-text";
+    damageText.textContent = `-${damage}`;
+    this.el.appendChild(damageText);
+
+    setTimeout(() => {
+      damageText.remove();
+    }, 700);
   }
 
   setState(nextState) {
@@ -140,10 +188,21 @@ class Enemy {
     this.state = nextState;
   }
 
-  remove() {
+  remove(useFade) {
     if (this.isRemoved) return;
 
     this.isRemoved = true;
+
+    if (useFade) {
+      this.el.classList.add("dead-fade");
+
+      setTimeout(() => {
+        this.el.remove();
+      }, 300);
+
+      return;
+    }
+
     this.el.remove();
   }
 }
