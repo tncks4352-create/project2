@@ -2,7 +2,8 @@ class Player {
   constructor() {
     this.el = document.getElementById("player");
 
-    this.x = 150;
+    this.startX = 150;
+    this.x = this.startX;
     this.speed = 4;
 
     this.hp = 100;
@@ -10,6 +11,13 @@ class Player {
 
     this.mana = 0;
     this.maxMana = 100;
+  }
+
+  reset() {
+    this.x = this.startX;
+    this.hp = this.maxHp;
+    this.mana = 0;
+    this.render();
   }
 
   update(keys) {

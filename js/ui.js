@@ -1,1 +1,1 @@
-class UIManager{}
+class UIManager {}

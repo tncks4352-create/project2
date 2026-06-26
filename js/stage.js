@@ -1,1 +1,1 @@
-class StageManager{}
+class StageManager {}

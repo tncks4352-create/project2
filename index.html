@@ -3,45 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paladog Project</title>
+  <title>신화창조</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="app">
-    <div id="menu">
-      <h1>PALADOG PROJECT</h1>
-      <p>팔라독 스타일 라인 전투 웹게임</p>
-      <button id="startBtn">게임 시작</button>
-    </div>
+    <section id="menuScreen" class="screen active">
+      <h1>신화창조</h1>
+      <p>신들의 힘으로 적의 신전을 파괴하라</p>
+      <button id="goSelectBtn">영웅 선택</button>
+    </section>
 
-    <div id="game" style="display:none;">
+    <section id="heroSelectScreen" class="screen">
+      <h2>영웅을 선택하세요</h2>
+
+      <div id="heroGrid"></div>
+
+      <div id="selectedHeroBox">
+        선택된 영웅: <span id="selectedHeroText">없음</span>
+      </div>
+
+      <button id="startBattleBtn" disabled>전투 시작</button>
+    </section>
+
+    <section id="gameScreen" class="screen">
       <div id="topUI">
-        <div>아군 기지 HP <span id="playerBaseHp">500</span></div>
-        <div>STAGE <span id="stageText">1</span></div>
-        <div>적 기지 HP <span id="enemyBaseHp">700</span></div>
+        <div>성역 HP <span id="playerBaseHp">500</span></div>
+        <div id="currentHeroName">영웅 없음</div>
+        <div>적 신전 HP <span id="enemyBaseHp">700</span></div>
       </div>
 
       <div id="battlefield">
-        <div id="backgroundText">PALADOG STYLE WEB GAME</div>
-        <div id="playerBase" class="base">HOME</div>
-        <div id="enemyBase" class="base">ENEMY</div>
+        <div id="backgroundText">MYTH GENESIS</div>
+        <div id="playerBase" class="base">성역</div>
+        <div id="enemyBase" class="base">적 신전</div>
         <div id="player"></div>
       </div>
 
       <div id="bottomUI">
-        <div id="manaBox">마나 <span id="manaText">0</span> / 100</div>
+        <div id="manaBox">신력 <span id="manaText">0</span> / 100</div>
 
-        <button class="slot">1. 토끼병<br><small>20 Mana</small></button>
-        <button class="slot">2. 고양이 궁수<br><small>35 Mana</small></button>
-        <button class="slot">3. 곰 전사<br><small>55 Mana</small></button>
-        <button class="slot skill">Q. 힐<br><small>30 Mana</small></button>
-        <button class="slot skill">E. 번개<br><small>45 Mana</small></button>
+        <button id="swordsmanBtn" class="slot" data-unit-id="swordsman">1. 검병<br><small>20 신력</small></button>
+        <button class="slot">2. 방패병<br><small>35 신력</small></button>
+        <button class="slot">3. 궁수<br><small>45 신력</small></button>
+
+        <button id="skill1Btn" class="slot skill">스킬 1<br><small>15 신력</small></button>
+        <button id="skill2Btn" class="slot skill">스킬 2<br><small>40 신력</small></button>
+        <button id="ultimateBtn" class="slot ultimate">궁극기<br><small>0%</small></button>
       </div>
 
       <div id="guideText">
-        A / D 이동
+        A / D 이동 · 아직 전투 기능은 다음 단계에서 추가
       </div>
-    </div>
+    </section>
   </div>
 
   <script src="./js/ui.js"></script>
