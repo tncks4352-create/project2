@@ -14,7 +14,15 @@ class SkillManager {
       return false;
     }
 
-    if (player.mana < skill.cost) return false;
+    if (player.mana < skill.cost) {
+      this.showMessage("신력이 부족합니다");
+      return false;
+    }
+
+    if (!this.hasValidTarget(skill.id)) {
+      this.showMessage("대상이 없습니다");
+      return false;
+    }
 
     player.mana -= skill.cost;
     this.cast(skill.id);
@@ -43,6 +51,19 @@ class SkillManager {
     }
 
     console.log("아직 구현되지 않은 스킬입니다");
+  }
+
+  hasValidTarget(skillId) {
+    if (
+      skillId === "zeusChainLightning" ||
+      skillId === "zeusThunderfall" ||
+      skillId === "poseidonWaterSpear" ||
+      skillId === "poseidonTidalWave"
+    ) {
+      return this.getAliveEnemies().length > 0;
+    }
+
+    return true;
   }
 
   castZeusChainLightning() {
@@ -129,5 +150,16 @@ class SkillManager {
     setTimeout(() => {
       effect.remove();
     }, delay);
+  }
+
+  showMessage(message) {
+    if (!this.battlefield) return;
+
+    const messageEl = document.createElement("div");
+    messageEl.className = "skill-message";
+    messageEl.textContent = message;
+
+    this.battlefield.appendChild(messageEl);
+    this.removeEffect(messageEl, 1000);
   }
 }

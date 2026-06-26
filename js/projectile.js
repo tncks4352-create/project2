@@ -3,6 +3,8 @@ const PROJECTILE_DATA = {
     id: "arrow",
     name: "Arrow",
     speed: 6,
+    imagePath: "./assets/images/arrow.png",
+    fallbackColor: "#f7d794",
     width: 28,
     height: 6,
     hitRange: 18,
@@ -25,9 +27,16 @@ class Projectile {
     this.el.style.width = projectileData.width + "px";
     this.el.style.height = projectileData.height + "px";
     this.el.style.bottom = this.bottom + "px";
+    this.applyImageFallback();
 
     this.battlefield.appendChild(this.el);
     this.render();
+  }
+
+  applyImageFallback() {
+    if (!window.applyImageFallback) return;
+
+    window.applyImageFallback(this.el, this.data.imagePath, this.data.fallbackColor);
   }
 
   update(enemies) {

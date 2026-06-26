@@ -8,6 +8,8 @@ const UNIT_DATA = {
     speed: 1.4,
     attackRange: 25,
     attackInterval: 1000,
+    imagePath: "./assets/images/swordman.png",
+    fallbackColor: "#d8dee9",
     spawnX: 140,
     bottom: 78,
     width: 58,
@@ -23,6 +25,8 @@ const UNIT_DATA = {
     speed: 0.8,
     attackRange: 25,
     attackInterval: 1200,
+    imagePath: "./assets/images/shieldman.png",
+    fallbackColor: "#9fb3c8",
     spawnX: 140,
     bottom: 76,
     width: 64,
@@ -40,6 +44,8 @@ const UNIT_DATA = {
     attackInterval: 1200,
     attackType: "projectile",
     projectileId: "arrow",
+    imagePath: "./assets/images/archerman.png",
+    fallbackColor: "#c8a46a",
     spawnX: 140,
     bottom: 78,
     width: 56,
@@ -55,6 +61,8 @@ const UNIT_DATA = {
     speed: 1.2,
     attackRange: 25,
     attackInterval: 1000,
+    imagePath: "./assets/images/skeleton.png",
+    fallbackColor: "#d7d7d7",
     spawnX: 140,
     bottom: 78,
     width: 58,
@@ -91,10 +99,17 @@ class Unit {
     this.el.style.width = unitData.width + "px";
     this.el.style.height = unitData.height + "px";
     this.el.style.bottom = unitData.bottom + "px";
+    this.applyImageFallback();
 
     this.hpBarFill = this.createHpBar();
     this.battlefield.appendChild(this.el);
     this.render();
+  }
+
+  applyImageFallback() {
+    if (!window.applyImageFallback) return;
+
+    window.applyImageFallback(this.el, this.data.imagePath, this.data.fallbackColor);
   }
 
   update(enemies) {
@@ -216,7 +231,6 @@ class Unit {
     if (this.state === UNIT_STATE.DEAD) return;
 
     this.hp -= damage;
-    window.soundManager && window.soundManager.play("hit");
     this.showDamageText(damage);
     this.updateHpBar();
 

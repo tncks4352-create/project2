@@ -14,9 +14,29 @@ const gameData = {
   stage: 1
 };
 
+const VISUAL_ASSETS = {
+  playerBase: {
+    path: "./assets/images/ancienttemple.png",
+    fallbackColor: "#574b90"
+  },
+  enemyBase: {
+    path: "./assets/images/darktemple.png",
+    fallbackColor: "#8b1e3f"
+  },
+  zeus: {
+    path: "./assets/images/zeus.png",
+    fallbackColor: "#ffd166"
+  },
+  poseidon: {
+    path: "./assets/images/poseidon.png",
+    fallbackColor: "#4dabf7"
+  }
+};
+
 window.addEventListener("DOMContentLoaded", () => {
   soundManager = new SoundManager();
   window.soundManager = soundManager;
+  window.applyImageFallback = applyImageFallback;
 
   player = new Player();
   projectileManager = new ProjectileManager("battlefield");
@@ -25,6 +45,7 @@ window.addEventListener("DOMContentLoaded", () => {
   skillManager = new SkillManager("battlefield", enemyManager);
 
   createHeroCards();
+  setupStaticImageFallbacks();
   setupButtonSounds();
   setupUnitButtons();
   setupSkillButtons();
@@ -48,6 +69,39 @@ window.addEventListener("DOMContentLoaded", () => {
 
   loop();
 });
+
+function applyImageFallback(el, imagePath, fallbackColor) {
+  if (!el || !imagePath) return;
+
+  const image = new Image();
+
+  image.onload = () => {
+    el.style.backgroundColor = "transparent";
+    el.style.borderColor = "transparent";
+  };
+
+  image.onerror = () => {
+    el.style.backgroundImage = "none";
+    el.style.backgroundColor = fallbackColor;
+    el.style.borderColor = "#000";
+  };
+
+  image.src = imagePath;
+}
+
+function setupStaticImageFallbacks() {
+  applyImageFallback(
+    document.getElementById("playerBase"),
+    VISUAL_ASSETS.playerBase.path,
+    VISUAL_ASSETS.playerBase.fallbackColor
+  );
+
+  applyImageFallback(
+    document.getElementById("enemyBase"),
+    VISUAL_ASSETS.enemyBase.path,
+    VISUAL_ASSETS.enemyBase.fallbackColor
+  );
+}
 
 function setupButtonSounds() {
   document.addEventListener("click", e => {
@@ -134,6 +188,7 @@ function startBattle() {
 
   document.getElementById("player").dataset.name = selectedHero.name;
   document.getElementById("player").className = `hero-${selectedHero.id}`;
+  applyHeroImageFallback(selectedHero);
 
   document.getElementById("skill1Btn").innerHTML =
     `${selectedHero.skill1}<br><small>15 신력</small>`;
@@ -151,6 +206,17 @@ function startBattle() {
   projectileManager.reset();
   soundManager.playBgm();
   showScreen("gameScreen");
+}
+
+function applyHeroImageFallback(hero) {
+  const heroAsset = VISUAL_ASSETS[hero.id];
+  if (!heroAsset) return;
+
+  applyImageFallback(
+    document.getElementById("player"),
+    heroAsset.path,
+    heroAsset.fallbackColor
+  );
 }
 
 function showScreen(screenId) {

@@ -7,6 +7,8 @@ const ENEMY_DATA = {
     speed: 1.5,
     attackRange: 25,
     attackInterval: 1000,
+    imagePath: "./assets/images/skeleton.png",
+    fallbackColor: "#f1f3f5",
     spawnX: 920,
     bottom: 78,
     width: 58,
@@ -21,6 +23,8 @@ const ENEMY_DATA = {
     speed: 0.5,
     attackRange: 30,
     attackInterval: 1500,
+    imagePath: "./assets/images/minotaur.png",
+    fallbackColor: "#6b2f1a",
     spawnX: 900,
     bottom: 72,
     width: 82,
@@ -54,10 +58,17 @@ class Enemy {
     this.el.style.width = enemyData.width + "px";
     this.el.style.height = enemyData.height + "px";
     this.el.style.bottom = enemyData.bottom + "px";
+    this.applyImageFallback();
 
     this.hpBarFill = this.createHpBar();
     this.battlefield.appendChild(this.el);
     this.render();
+  }
+
+  applyImageFallback() {
+    if (!window.applyImageFallback) return;
+
+    window.applyImageFallback(this.el, this.data.imagePath, this.data.fallbackColor);
   }
 
   update(units) {
@@ -158,7 +169,6 @@ class Enemy {
     if (this.state === ENEMY_STATE.DEAD) return;
 
     this.hp -= damage;
-    window.soundManager && window.soundManager.play("hit");
     this.showDamageText(damage);
     this.updateHpBar();
 
