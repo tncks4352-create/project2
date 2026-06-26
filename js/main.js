@@ -4,6 +4,7 @@ let player;
 let unitManager;
 let enemyManager;
 let projectileManager;
+let skillManager;
 let selectedHero = null;
 
 const gameData = {
@@ -17,9 +18,11 @@ window.addEventListener("DOMContentLoaded", () => {
   projectileManager = new ProjectileManager("battlefield");
   unitManager = new UnitManager("battlefield", projectileManager);
   enemyManager = new EnemyManager("battlefield");
+  skillManager = new SkillManager("battlefield", enemyManager);
 
   createHeroCards();
   setupUnitButtons();
+  setupSkillButtons();
 
   document.getElementById("goSelectBtn").onclick = () => {
     showScreen("heroSelectScreen");
@@ -48,6 +51,16 @@ function setupUnitButtons() {
     button.addEventListener("click", () => {
       recruitUnit(button.dataset.unitId);
     });
+  });
+}
+
+function setupSkillButtons() {
+  document.getElementById("skill1Btn").addEventListener("click", () => {
+    skillManager.useSkill(selectedHero, "skill1", player);
+  });
+
+  document.getElementById("skill2Btn").addEventListener("click", () => {
+    skillManager.useSkill(selectedHero, "skill2", player);
   });
 }
 

@@ -9,6 +9,16 @@ window.HEROES = [
     skill1: "연쇄 번개",
     skill2: "천둥 강림",
     ultimate: "천벌",
+    skills: {
+      skill1: {
+        id: "zeusChainLightning",
+        cost: 15
+      },
+      skill2: {
+        id: "zeusThunderfall",
+        cost: 40
+      }
+    },
     passive: {
       type: "unitStatMultiplier",
       unitId: "archer",
@@ -26,6 +36,16 @@ window.HEROES = [
     skill1: "물창",
     skill2: "해일",
     ultimate: "바다의 분노",
+    skills: {
+      skill1: {
+        id: "poseidonWaterSpear",
+        cost: 15
+      },
+      skill2: {
+        id: "poseidonTidalWave",
+        cost: 40
+      }
+    },
     passive: {
       type: "unitStatMultiplier",
       unitId: "shieldman",

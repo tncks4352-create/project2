@@ -344,6 +344,80 @@ button {
   background: #f7d794;
 }
 
+.skill-effect {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.lightning-strike {
+  width: 18px;
+  height: 95px;
+  background: #ffe066;
+  border: 3px solid #000;
+  box-shadow: 0 0 18px #fff3bf;
+  transform: translateY(-70px) skewX(-12deg);
+  animation: skill-pop 0.45s forwards;
+}
+
+.lightning-flash {
+  inset: 0;
+  background: rgba(255, 238, 88, 0.45);
+  animation: skill-fade 0.55s forwards;
+}
+
+.water-spear {
+  width: 78px;
+  height: 16px;
+  background: #74c0fc;
+  border: 3px solid #000;
+  border-radius: 999px;
+  animation: skill-pop 0.45s forwards;
+}
+
+.tidal-wave {
+  left: -180px;
+  bottom: 70px;
+  width: 180px;
+  height: 95px;
+  background: rgba(116, 192, 252, 0.72);
+  border: 4px solid #000;
+  border-radius: 55% 45% 0 0;
+  animation: tidal-wave-move 0.75s forwards;
+}
+
+@keyframes skill-pop {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes skill-fade {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes tidal-wave-move {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(1280px);
+  }
+}
+
 .hp-bar {
   position: absolute;
   left: 50%;
