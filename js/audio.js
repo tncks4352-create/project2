@@ -15,7 +15,7 @@ class SoundManager {
     this.sounds = {};
     this.bgm = new Audio(SOUND_DATA.bgm);
     this.bgm.loop = true;
-    this.bgm.volume = 0.25;
+    this.bgm.volume = 0.4;
 
     Object.keys(SOUND_DATA).forEach(soundId => {
       if (soundId === "bgm") return;
@@ -26,6 +26,8 @@ class SoundManager {
 
   getVolume(soundId) {
     if (soundId === "lightning" || soundId === "wave") return 0.45;
+    if (soundId === "slash") return 0.175;
+    if (soundId === "death") return 0.22;
     return 0.35;
   }
 

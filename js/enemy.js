@@ -9,10 +9,10 @@ const ENEMY_DATA = {
     attackInterval: 1000,
     imagePath: "./assets/images/skeleton.png",
     fallbackColor: "#f1f3f5",
-    spawnX: 805,
-    bottom: 55,
-    width: 99,
-    height: 129,
+    spawnX: 735,
+    bottom: 66,
+    width: 96,
+    height: 126,
     removeX: -60
   },
   minotaur: {
@@ -26,9 +26,9 @@ const ENEMY_DATA = {
     imagePath: "./assets/images/minotaur.png",
     fallbackColor: "#6b2f1a",
     spawnX: 760,
-    bottom: 46,
-    width: 189,
-    height: 235,
+    bottom: 54,
+    width: 165,
+    height: 205,
     removeX: -80
   }
 };

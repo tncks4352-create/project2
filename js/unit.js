@@ -10,10 +10,10 @@ const UNIT_DATA = {
     attackInterval: 1000,
     imagePath: "./assets/images/swordman.png",
     fallbackColor: "#d8dee9",
-    spawnX: 220,
-    bottom: 54,
-    width: 104,
-    height: 140,
+    spawnX: 350,
+    bottom: 66,
+    width: 108,
+    height: 148,
     removeX: 1100
   },
   shieldman: {
@@ -27,10 +27,10 @@ const UNIT_DATA = {
     attackInterval: 1200,
     imagePath: "./assets/images/shieldman.png",
     fallbackColor: "#9fb3c8",
-    spawnX: 210,
-    bottom: 50,
-    width: 128,
-    height: 168,
+    spawnX: 340,
+    bottom: 62,
+    width: 124,
+    height: 162,
     removeX: 1100
   },
   archer: {
@@ -46,10 +46,10 @@ const UNIT_DATA = {
     projectileId: "arrow",
     imagePath: "./assets/images/archerman.png",
     fallbackColor: "#c8a46a",
-    spawnX: 205,
-    bottom: 55,
-    width: 101,
-    height: 137,
+    spawnX: 335,
+    bottom: 66,
+    width: 106,
+    height: 144,
     removeX: 1100
   },
   allySkeleton: {
@@ -63,10 +63,10 @@ const UNIT_DATA = {
     attackInterval: 1000,
     imagePath: "./assets/images/skeleton.png",
     fallbackColor: "#d7d7d7",
-    spawnX: 220,
-    bottom: 55,
-    width: 99,
-    height: 129,
+    spawnX: 350,
+    bottom: 66,
+    width: 96,
+    height: 126,
     removeX: 1100,
     skipDeathPassive: true
   }
