@@ -12,6 +12,20 @@ const ENEMY_DATA = {
     width: 46,
     height: 62,
     removeX: -60
+  },
+  minotaur: {
+    id: "minotaur",
+    name: "Minotaur",
+    hp: 300,
+    atk: 8,
+    speed: 0.6,
+    attackRange: 30,
+    attackInterval: 1300,
+    spawnX: 900,
+    bottom: 82,
+    width: 68,
+    height: 86,
+    removeX: -80
   }
 };
 
@@ -211,8 +225,16 @@ class EnemyManager {
   constructor(battlefieldId) {
     this.battlefield = document.getElementById(battlefieldId);
     this.enemies = [];
-    this.spawnInterval = 3000;
-    this.lastSpawnTime = 0;
+    this.spawnTimers = {
+      skeleton: {
+        interval: 3000,
+        lastSpawnTime: 0
+      },
+      minotaur: {
+        interval: 8000,
+        lastSpawnTime: 0
+      }
+    };
   }
 
   spawn(enemyId) {
@@ -246,15 +268,19 @@ class EnemyManager {
   updateSpawnTimer() {
     const now = Date.now();
 
-    if (this.lastSpawnTime === 0) {
-      this.lastSpawnTime = now;
-      return;
-    }
+    Object.keys(this.spawnTimers).forEach(enemyId => {
+      const spawnTimer = this.spawnTimers[enemyId];
 
-    if (now - this.lastSpawnTime < this.spawnInterval) return;
+      if (spawnTimer.lastSpawnTime === 0) {
+        spawnTimer.lastSpawnTime = now;
+        return;
+      }
 
-    this.spawn("skeleton");
-    this.lastSpawnTime = now;
+      if (now - spawnTimer.lastSpawnTime < spawnTimer.interval) return;
+
+      this.spawn(enemyId);
+      spawnTimer.lastSpawnTime = now;
+    });
   }
 
   reset() {
@@ -263,6 +289,8 @@ class EnemyManager {
     });
 
     this.enemies = [];
-    this.lastSpawnTime = Date.now();
+    Object.keys(this.spawnTimers).forEach(enemyId => {
+      this.spawnTimers[enemyId].lastSpawnTime = Date.now();
+    });
   }
 }
