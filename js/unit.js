@@ -28,6 +28,23 @@ const UNIT_DATA = {
     width: 54,
     height: 70,
     removeX: 1100
+  },
+  archer: {
+    id: "archer",
+    name: "Archer",
+    cost: 45,
+    hp: 70,
+    atk: 15,
+    speed: 1.4,
+    attackRange: 180,
+    attackInterval: 1200,
+    attackType: "projectile",
+    projectileId: "arrow",
+    spawnX: 140,
+    bottom: 90,
+    width: 44,
+    height: 60,
+    removeX: 1100
   }
 };
 
@@ -38,9 +55,10 @@ const UNIT_STATE = {
 };
 
 class Unit {
-  constructor(unitData, battlefield) {
+  constructor(unitData, battlefield, projectileManager) {
     this.data = unitData;
     this.battlefield = battlefield;
+    this.projectileManager = projectileManager;
     this.x = unitData.spawnX;
     this.hp = unitData.hp;
     this.maxHp = unitData.hp;
@@ -146,13 +164,33 @@ class Unit {
     if (now - this.lastAttackTime < this.data.attackInterval) return;
 
     this.playAttackMotion();
-    this.target.takeDamage(this.atk);
+    this.dealDamage();
     this.lastAttackTime = now;
 
     if (this.target.isRemoved || this.target.state === "DEAD") {
       this.target = null;
       this.setState(UNIT_STATE.MOVE);
     }
+  }
+
+  dealDamage() {
+    if (this.data.attackType === "projectile") {
+      this.fireProjectile();
+      return;
+    }
+
+    this.target.takeDamage(this.atk);
+  }
+
+  fireProjectile() {
+    if (!this.projectileManager || !this.data.projectileId) return;
+
+    this.projectileManager.spawn(this.data.projectileId, {
+      x: this.x + this.data.width,
+      bottom: this.data.bottom + this.data.height * 0.55,
+      damage: this.atk,
+      direction: 1
+    });
   }
 
   takeDamage(damage) {
@@ -224,8 +262,9 @@ class Unit {
 }
 
 class UnitManager {
-  constructor(battlefieldId) {
+  constructor(battlefieldId, projectileManager) {
     this.battlefield = document.getElementById(battlefieldId);
+    this.projectileManager = projectileManager;
     this.units = [];
   }
 
@@ -233,7 +272,7 @@ class UnitManager {
     const unitData = UNIT_DATA[unitId];
     if (!unitData || !this.battlefield) return null;
 
-    const unit = new Unit(unitData, this.battlefield);
+    const unit = new Unit(unitData, this.battlefield, this.projectileManager);
     this.units.push(unit);
     return unit;
   }

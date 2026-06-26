@@ -71,6 +71,7 @@ const keys = {};
 let player;
 let unitManager;
 let enemyManager;
+let projectileManager;
 let selectedHero = null;
 
 const gameData = {
@@ -81,7 +82,8 @@ const gameData = {
 
 window.addEventListener("DOMContentLoaded", () => {
   player = new Player();
-  unitManager = new UnitManager("battlefield");
+  projectileManager = new ProjectileManager("battlefield");
+  unitManager = new UnitManager("battlefield", projectileManager);
   enemyManager = new EnemyManager("battlefield");
 
   createHeroCards();
@@ -187,6 +189,7 @@ function startBattle() {
   player.reset();
   unitManager.reset();
   enemyManager.reset();
+  projectileManager.reset();
   showScreen("gameScreen");
 }
 
@@ -209,6 +212,7 @@ function loop() {
     player.update(keys);
     unitManager.update(enemyManager.enemies);
     enemyManager.update(unitManager.units);
+    projectileManager.update(enemyManager.enemies);
     updateUI();
   }
 

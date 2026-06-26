@@ -270,6 +270,22 @@ button {
   background: #6c8ebf;
 }
 
+.unit-archer {
+  border-radius: 10px 10px 5px 5px;
+  background: #c8a46a;
+}
+
+.unit-archer::before {
+  content: "";
+  position: absolute;
+  right: 5px;
+  top: 13px;
+  width: 14px;
+  height: 34px;
+  border-right: 4px solid #000;
+  border-radius: 50%;
+}
+
 .enemy {
   position: absolute;
   border: 3px solid #000;
@@ -310,6 +326,17 @@ button {
   border-left: 5px solid #000;
   border-right: 5px solid #000;
   border-radius: 50%;
+}
+
+.projectile {
+  position: absolute;
+  border: 2px solid #000;
+  pointer-events: none;
+}
+
+.projectile-arrow {
+  border-radius: 999px;
+  background: #f7d794;
 }
 
 .hp-bar {
