@@ -108,12 +108,12 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function setupUnitButtons() {
-  const swordsmanBtn = document.getElementById("swordsmanBtn");
+  const unitButtons = document.querySelectorAll("[data-unit-id]");
 
-  if (!swordsmanBtn) return;
-
-  swordsmanBtn.addEventListener("click", () => {
-    recruitUnit(swordsmanBtn.dataset.unitId);
+  unitButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      recruitUnit(button.dataset.unitId);
+    });
   });
 }
 
@@ -207,8 +207,8 @@ function updateUI() {
 function loop() {
   if (document.getElementById("gameScreen").classList.contains("active")) {
     player.update(keys);
-    unitManager.update();
-    enemyManager.update();
+    unitManager.update(enemyManager.enemies);
+    enemyManager.update(unitManager.units);
     updateUI();
   }
 
