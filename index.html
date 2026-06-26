@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paladog Style Line Battle</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="gameWrap">
+    <div id="topUI">
+      <div class="baseBox">아군 기지 HP <span id="playerBaseHp">500</span></div>
+      <div class="stageBox">STAGE 1</div>
+      <div class="baseBox">적 기지 HP <span id="enemyBaseHp">700</span></div>
+    </div>
+
+    <div id="battlefield">
+      <div id="skyText">PALADOG STYLE WEB GAME</div>
+
+      <div id="playerBase" class="base playerBase">HOME</div>
+      <div id="enemyBase" class="base enemyBase">ENEMY</div>
+
+      <div id="hero">
+        <div class="heroName">PALADOG</div>
+        <div class="hpBar"><div id="heroHpBar"></div></div>
+      </div>
+    </div>
+
+    <div id="bottomUI">
+      <div class="resource">
+        마나 <span id="mana">0</span> / 100
+      </div>
+
+      <button class="slot" data-unit="rabbit">
+        🐰 토끼병<br>
+        <small>20 Mana</small>
+      </button>
+
+      <button class="slot" data-unit="cat">
+        🐱 고양이 궁수<br>
+        <small>35 Mana</small>
+      </button>
+
+      <button class="slot" data-unit="bear">
+        🐻 곰 전사<br>
+        <small>55 Mana</small>
+      </button>
+
+      <button id="healBtn" class="slot skill">
+        ✨ 힐<br>
+        <small>30 Mana</small>
+      </button>
+
+      <button id="lightningBtn" class="slot skill">
+        ⚡ 번개<br>
+        <small>45 Mana</small>
+      </button>
+    </div>
+
+    <div id="info">
+      A/D 이동 · SPACE 영웅 공격 · 숫자 1/2/3 유닛 소환 · Q 힐 · E 번개
+    </div>
+
+    <div id="resultModal" class="hidden">
+      <div id="resultBox">
+        <h1 id="resultText"></h1>
+        <button onclick="location.reload()">다시 시작</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
