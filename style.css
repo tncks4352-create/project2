@@ -171,7 +171,11 @@ button {
   overflow: hidden;
   border: 4px solid #000;
   background:
+    linear-gradient(rgba(41, 36, 61, 0.25), rgba(79, 59, 44, 0.25)),
+    url("./assets/images/background.png"),
     linear-gradient(#29243d 0%, #6f5f99 58%, #706143 58%, #4f3b2c 100%);
+  background-size: cover;
+  background-position: center;
 }
 
 #backgroundText {
@@ -199,11 +203,19 @@ button {
 #playerBase {
   left: 12px;
   background: #574b90;
+  background-image: url("./assets/images/ancienttemple.png");
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
 }
 
 #enemyBase {
   right: 12px;
   background: #8b1e3f;
+  background-image: url("./assets/images/darktemple.png");
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
 }
 
 #player {
@@ -212,9 +224,20 @@ button {
   bottom: 92px;
   width: 80px;
   height: 95px;
-  background: var(--active-hero-color, #ffd166);
+  background-color: var(--active-hero-color, #ffd166);
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
   border: 4px solid #000;
   border-radius: 18px 18px 8px 8px;
+}
+
+#player.hero-zeus {
+  background-image: url("./assets/images/zeus.png");
+}
+
+#player.hero-poseidon {
+  background-image: url("./assets/images/poseidon.png");
 }
 
 #player::after {
@@ -232,7 +255,10 @@ button {
 .unit {
   position: absolute;
   border: 3px solid #000;
-  background: #d8dee9;
+  background-color: #d8dee9;
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
   transition: opacity 0.3s, transform 0.12s;
 }
 
@@ -250,12 +276,14 @@ button {
 
 .unit-swordsman {
   border-radius: 10px 10px 5px 5px;
-  background: #d8dee9;
+  background-color: #d8dee9;
+  background-image: url("./assets/images/swordman.png");
 }
 
 .unit-shieldman {
   border-radius: 12px 12px 6px 6px;
-  background: #9fb3c8;
+  background-color: #9fb3c8;
+  background-image: url("./assets/images/shieldman.png");
 }
 
 .unit-shieldman::before {
@@ -272,7 +300,8 @@ button {
 
 .unit-archer {
   border-radius: 10px 10px 5px 5px;
-  background: #c8a46a;
+  background-color: #c8a46a;
+  background-image: url("./assets/images/archerman.png");
 }
 
 .unit-archer::before {
@@ -288,13 +317,17 @@ button {
 
 .unit-allySkeleton {
   border-radius: 10px 10px 5px 5px;
-  background: #d7d7d7;
+  background-color: #d7d7d7;
+  background-image: url("./assets/images/skeleton.png");
 }
 
 .enemy {
   position: absolute;
   border: 3px solid #000;
-  background: #f1f3f5;
+  background-color: #f1f3f5;
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
   transition: opacity 0.3s, transform 0.12s;
 }
 
@@ -312,13 +345,15 @@ button {
 
 .enemy-skeleton {
   border-radius: 10px 10px 5px 5px;
-  background: #f1f3f5;
+  background-color: #f1f3f5;
+  background-image: url("./assets/images/skeleton.png");
 }
 
 .enemy-minotaur {
   border-width: 4px;
   border-radius: 14px 14px 7px 7px;
-  background: #6b2f1a;
+  background-color: #6b2f1a;
+  background-image: url("./assets/images/minotaur.png");
 }
 
 .enemy-minotaur::before {
@@ -341,7 +376,11 @@ button {
 
 .projectile-arrow {
   border-radius: 999px;
-  background: #f7d794;
+  background-color: #f7d794;
+  background-image: url("./assets/images/arrow.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .skill-effect {
@@ -353,7 +392,11 @@ button {
 .lightning-strike {
   width: 18px;
   height: 95px;
-  background: #ffe066;
+  background-color: #ffe066;
+  background-image: url("./assets/images/lightning.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 3px solid #000;
   box-shadow: 0 0 18px #fff3bf;
   transform: translateY(-70px) skewX(-12deg);
@@ -363,13 +406,21 @@ button {
 .lightning-flash {
   inset: 0;
   background: rgba(255, 238, 88, 0.45);
+  background-image: url("./assets/images/lightning.png");
+  background-size: 220px 220px;
+  background-position: center;
+  background-repeat: no-repeat;
   animation: skill-fade 0.55s forwards;
 }
 
 .water-spear {
   width: 78px;
   height: 16px;
-  background: #74c0fc;
+  background-color: #74c0fc;
+  background-image: url("./assets/images/water_wave.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 3px solid #000;
   border-radius: 999px;
   animation: skill-pop 0.45s forwards;
@@ -380,7 +431,11 @@ button {
   bottom: 70px;
   width: 180px;
   height: 95px;
-  background: rgba(116, 192, 252, 0.72);
+  background-color: rgba(116, 192, 252, 0.72);
+  background-image: url("./assets/images/water_wave.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 4px solid #000;
   border-radius: 55% 45% 0 0;
   animation: tidal-wave-move 0.75s forwards;

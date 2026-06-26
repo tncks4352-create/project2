@@ -8,9 +8,9 @@ const ENEMY_DATA = {
     attackRange: 25,
     attackInterval: 1000,
     spawnX: 920,
-    bottom: 88,
-    width: 46,
-    height: 62,
+    bottom: 78,
+    width: 58,
+    height: 76,
     removeX: -60
   },
   minotaur: {
@@ -22,9 +22,9 @@ const ENEMY_DATA = {
     attackRange: 30,
     attackInterval: 1500,
     spawnX: 900,
-    bottom: 82,
-    width: 68,
-    height: 86,
+    bottom: 72,
+    width: 82,
+    height: 102,
     removeX: -80
   }
 };
@@ -144,6 +144,7 @@ class Enemy {
     if (now - this.lastAttackTime < this.data.attackInterval) return;
 
     this.playAttackMotion();
+    window.soundManager && window.soundManager.play("slash");
     this.target.takeDamage(this.atk);
     this.lastAttackTime = now;
 
@@ -157,6 +158,7 @@ class Enemy {
     if (this.state === ENEMY_STATE.DEAD) return;
 
     this.hp -= damage;
+    window.soundManager && window.soundManager.play("hit");
     this.showDamageText(damage);
     this.updateHpBar();
 
@@ -167,6 +169,7 @@ class Enemy {
 
   die() {
     this.hp = 0;
+    window.soundManager && window.soundManager.play("death");
     this.updateHpBar();
     this.setState(ENEMY_STATE.DEAD);
     this.remove(true);

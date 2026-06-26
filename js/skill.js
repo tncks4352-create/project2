@@ -49,11 +49,13 @@ class SkillManager {
     const target = this.findFrontEnemy();
     if (!target) return;
 
+    window.soundManager && window.soundManager.play("lightning");
     target.takeDamage(35);
     this.createEffect("skill-effect lightning-strike", target.x, target.data.bottom + target.data.height);
   }
 
   castZeusThunderfall() {
+    window.soundManager && window.soundManager.play("lightning");
     this.getAliveEnemies().forEach(enemy => {
       enemy.takeDamage(25);
     });
@@ -65,12 +67,14 @@ class SkillManager {
     const target = this.findFrontEnemy();
     if (!target) return;
 
+    window.soundManager && window.soundManager.play("wave");
     target.takeDamage(25);
     this.knockback(target, 40);
     this.createEffect("skill-effect water-spear", target.x, target.data.bottom + target.data.height * 0.5);
   }
 
   castPoseidonTidalWave() {
+    window.soundManager && window.soundManager.play("wave");
     this.getAliveEnemies().forEach(enemy => {
       enemy.takeDamage(15);
       this.knockback(enemy, 80);

@@ -9,9 +9,9 @@ const UNIT_DATA = {
     attackRange: 25,
     attackInterval: 1000,
     spawnX: 140,
-    bottom: 88,
-    width: 46,
-    height: 62,
+    bottom: 78,
+    width: 58,
+    height: 78,
     removeX: 1100
   },
   shieldman: {
@@ -24,9 +24,9 @@ const UNIT_DATA = {
     attackRange: 25,
     attackInterval: 1200,
     spawnX: 140,
-    bottom: 86,
-    width: 54,
-    height: 70,
+    bottom: 76,
+    width: 64,
+    height: 84,
     removeX: 1100
   },
   archer: {
@@ -41,9 +41,9 @@ const UNIT_DATA = {
     attackType: "projectile",
     projectileId: "arrow",
     spawnX: 140,
-    bottom: 90,
-    width: 44,
-    height: 60,
+    bottom: 78,
+    width: 56,
+    height: 76,
     removeX: 1100
   },
   allySkeleton: {
@@ -56,9 +56,9 @@ const UNIT_DATA = {
     attackRange: 25,
     attackInterval: 1000,
     spawnX: 140,
-    bottom: 88,
-    width: 46,
-    height: 62,
+    bottom: 78,
+    width: 58,
+    height: 76,
     removeX: 1100,
     skipDeathPassive: true
   }
@@ -196,12 +196,14 @@ class Unit {
       return;
     }
 
+    window.soundManager && window.soundManager.play("slash");
     this.target.takeDamage(this.atk);
   }
 
   fireProjectile() {
     if (!this.projectileManager || !this.data.projectileId) return;
 
+    window.soundManager && window.soundManager.play("arrow");
     this.projectileManager.spawn(this.data.projectileId, {
       x: this.x + this.data.width,
       bottom: this.data.bottom + this.data.height * 0.55,
@@ -214,6 +216,7 @@ class Unit {
     if (this.state === UNIT_STATE.DEAD) return;
 
     this.hp -= damage;
+    window.soundManager && window.soundManager.play("hit");
     this.showDamageText(damage);
     this.updateHpBar();
 
@@ -224,6 +227,7 @@ class Unit {
 
   die() {
     this.hp = 0;
+    window.soundManager && window.soundManager.play("death");
     this.updateHpBar();
     this.setState(UNIT_STATE.DEAD);
     this.unitManager.handleUnitDeath(this);
@@ -297,6 +301,7 @@ class UnitManager {
 
     const unit = new Unit(unitData, this.battlefield, this.projectileManager, this, options);
     this.units.push(unit);
+    window.soundManager && window.soundManager.play("summon");
     return unit;
   }
 

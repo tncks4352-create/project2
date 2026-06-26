@@ -5,6 +5,7 @@ let unitManager;
 let enemyManager;
 let projectileManager;
 let skillManager;
+let soundManager;
 let selectedHero = null;
 
 const gameData = {
@@ -14,6 +15,9 @@ const gameData = {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
+  soundManager = new SoundManager();
+  window.soundManager = soundManager;
+
   player = new Player();
   projectileManager = new ProjectileManager("battlefield");
   unitManager = new UnitManager("battlefield", projectileManager);
@@ -21,6 +25,7 @@ window.addEventListener("DOMContentLoaded", () => {
   skillManager = new SkillManager("battlefield", enemyManager);
 
   createHeroCards();
+  setupButtonSounds();
   setupUnitButtons();
   setupSkillButtons();
 
@@ -43,6 +48,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   loop();
 });
+
+function setupButtonSounds() {
+  document.addEventListener("click", e => {
+    if (!e.target.closest("button")) return;
+    soundManager.play("button");
+  });
+}
 
 function setupUnitButtons() {
   const unitButtons = document.querySelectorAll("[data-unit-id]");
@@ -121,6 +133,7 @@ function startBattle() {
     `${selectedHero.icon} ${selectedHero.name}`;
 
   document.getElementById("player").dataset.name = selectedHero.name;
+  document.getElementById("player").className = `hero-${selectedHero.id}`;
 
   document.getElementById("skill1Btn").innerHTML =
     `${selectedHero.skill1}<br><small>15 신력</small>`;
@@ -136,6 +149,7 @@ function startBattle() {
   unitManager.reset();
   enemyManager.reset();
   projectileManager.reset();
+  soundManager.playBgm();
   showScreen("gameScreen");
 }
 
