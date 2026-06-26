@@ -252,6 +252,29 @@ button {
   background: #d8dee9;
 }
 
+.enemy {
+  position: absolute;
+  border: 3px solid #000;
+  background: #f1f3f5;
+}
+
+.enemy::after {
+  content: attr(data-name);
+  position: absolute;
+  width: 100%;
+  top: 22px;
+  left: 0;
+  text-align: center;
+  color: #111;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.enemy-skeleton {
+  border-radius: 10px 10px 5px 5px;
+  background: #f1f3f5;
+}
+
 #bottomUI {
   height: 110px;
   background: #2d1b0e;

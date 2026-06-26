@@ -70,6 +70,7 @@ const HEROES = [
 const keys = {};
 let player;
 let unitManager;
+let enemyManager;
 let selectedHero = null;
 
 const gameData = {
@@ -81,6 +82,7 @@ const gameData = {
 window.addEventListener("DOMContentLoaded", () => {
   player = new Player();
   unitManager = new UnitManager("battlefield");
+  enemyManager = new EnemyManager("battlefield");
 
   createHeroCards();
   setupUnitButtons();
@@ -184,6 +186,7 @@ function startBattle() {
 
   player.reset();
   unitManager.reset();
+  enemyManager.reset();
   showScreen("gameScreen");
 }
 
@@ -205,6 +208,7 @@ function loop() {
   if (document.getElementById("gameScreen").classList.contains("active")) {
     player.update(keys);
     unitManager.update();
+    enemyManager.update();
     updateUI();
   }
 
