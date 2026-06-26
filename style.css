@@ -286,6 +286,11 @@ button {
   border-radius: 50%;
 }
 
+.unit-allySkeleton {
+  border-radius: 10px 10px 5px 5px;
+  background: #d7d7d7;
+}
+
 .enemy {
   position: absolute;
   border: 3px solid #000;

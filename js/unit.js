@@ -45,6 +45,22 @@ const UNIT_DATA = {
     width: 44,
     height: 60,
     removeX: 1100
+  },
+  allySkeleton: {
+    id: "allySkeleton",
+    name: "Skeleton",
+    cost: 0,
+    hp: 100,
+    atk: 10,
+    speed: 1.2,
+    attackRange: 25,
+    attackInterval: 1000,
+    spawnX: 140,
+    bottom: 88,
+    width: 46,
+    height: 62,
+    removeX: 1100,
+    skipDeathPassive: true
   }
 };
 
@@ -55,11 +71,12 @@ const UNIT_STATE = {
 };
 
 class Unit {
-  constructor(unitData, battlefield, projectileManager) {
+  constructor(unitData, battlefield, projectileManager, unitManager, options) {
     this.data = unitData;
     this.battlefield = battlefield;
     this.projectileManager = projectileManager;
-    this.x = unitData.spawnX;
+    this.unitManager = unitManager;
+    this.x = options && typeof options.x === "number" ? options.x : unitData.spawnX;
     this.hp = unitData.hp;
     this.maxHp = unitData.hp;
     this.atk = unitData.atk;
@@ -209,6 +226,7 @@ class Unit {
     this.hp = 0;
     this.updateHpBar();
     this.setState(UNIT_STATE.DEAD);
+    this.unitManager.handleUnitDeath(this);
     this.remove(true);
   }
 
@@ -265,16 +283,54 @@ class UnitManager {
   constructor(battlefieldId, projectileManager) {
     this.battlefield = document.getElementById(battlefieldId);
     this.projectileManager = projectileManager;
+    this.selectedHero = null;
     this.units = [];
   }
 
-  spawn(unitId) {
-    const unitData = UNIT_DATA[unitId];
+  setSelectedHero(hero) {
+    this.selectedHero = hero;
+  }
+
+  spawn(unitId, options) {
+    const unitData = this.createUnitData(unitId);
     if (!unitData || !this.battlefield) return null;
 
-    const unit = new Unit(unitData, this.battlefield, this.projectileManager);
+    const unit = new Unit(unitData, this.battlefield, this.projectileManager, this, options);
     this.units.push(unit);
     return unit;
+  }
+
+  createUnitData(unitId) {
+    const baseData = UNIT_DATA[unitId];
+    if (!baseData) return null;
+
+    const unitData = { ...baseData };
+    this.applyHeroPassive(unitData);
+    return unitData;
+  }
+
+  applyHeroPassive(unitData) {
+    if (!this.selectedHero || !this.selectedHero.passive) return;
+
+    const passive = this.selectedHero.passive;
+    const isTargetUnit = passive.unitId === "all" || passive.unitId === unitData.id;
+
+    if (passive.type !== "unitStatMultiplier" || !isTargetUnit) return;
+    if (typeof unitData[passive.stat] !== "number") return;
+
+    unitData[passive.stat] = Math.round(unitData[passive.stat] * passive.multiplier);
+  }
+
+  handleUnitDeath(unit) {
+    const passive = this.selectedHero && this.selectedHero.passive;
+
+    if (!passive || passive.type !== "reviveAsAllySkeleton") return;
+    if (unit.data.skipDeathPassive) return;
+    if (Math.random() >= passive.chance) return;
+
+    this.spawn(passive.unitId, {
+      x: unit.x
+    });
   }
 
   update(enemies) {
