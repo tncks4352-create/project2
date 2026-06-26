@@ -1,50 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paladog Project</title>
-  <link rel="stylesheet" href="./style.css" />
+<html lang="ko"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paladog Project</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
-    <section id="menuScreen" class="screen active">
-      <h1>PALADOG PROJECT</h1>
-      <p>팔라독 스타일 라인 전투 웹게임</p>
-      <button id="startBtn">게임 시작</button>
-    </section>
-
-    <section id="gameScreen" class="screen">
-      <div id="topUI">
-        <div>STAGE <span id="stageText">1</span></div>
-        <div>HP <span id="hpText">100</span></div>
-        <div>MANA <span id="manaText">0</span></div>
-      </div>
-
-      <div id="battlefield">
-        <div id="backgroundText">PALADOG STYLE</div>
-        <div id="playerBase" class="base">HOME</div>
-        <div id="enemyBase" class="base">ENEMY</div>
-        <div id="player"></div>
-      </div>
-
-      <div id="bottomUI">
-        <button class="slot">1. 토끼병</button>
-        <button class="slot">2. 고양이 궁수</button>
-        <button class="slot">3. 곰 전사</button>
-        <button class="slot">Q. 힐</button>
-        <button class="slot">E. 번개</button>
-      </div>
-
-      <p id="guideText">A / D 이동</p>
-    </section>
+<div id="app">
+  <div id="menu">
+    <h1>PALADOG PROJECT</h1>
+    <button id="startBtn">게임 시작</button>
   </div>
-
-  <script src="./js/ui.js"></script>
-  <script src="./js/player.js"></script>
-  <script src="./js/unit.js"></script>
-  <script src="./js/enemy.js"></script>
-  <script src="./js/stage.js"></script>
-  <script src="./js/main.js"></script>
-</body>
-</html>
+  <div id="game" style="display:none;">
+    <div id="player"></div>
+  </div>
+</div>
+<script src="./js/ui.js"></script>
+<script src="./js/player.js"></script>
+<script src="./js/unit.js"></script>
+<script src="./js/enemy.js"></script>
+<script src="./js/stage.js"></script>
+<script src="./js/main.js"></script>
+</body></html>
