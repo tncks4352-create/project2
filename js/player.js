@@ -42,3 +42,5 @@ class Player {
     this.el.style.left = this.x + "px";
   }
 }
+
+window.Player = Player;
